@@ -111,6 +111,9 @@ const WeeklyReport = () => {
                                         data-report-id={report.id}
                                         className="mt-4 bg-white p-6 rounded-lg shadow-md"
                                     >
+                                        <h2 className="text-2xl font-semibold text-gray-800 mb-8 text-center">
+                                            Branch: {location}
+                                        </h2>
                                         <table className="w-full border-collapse border border-gray-300">
                                             <thead>
                                                 <tr className="bg-gray-100">

@@ -190,7 +190,7 @@ const SPSchedule = () => {
 
       setSelectedDate('');
       setEmployeeName('');
-      setShiftTime('Day');
+      setShiftTime('AM');
       setLocation('');
       setIsEditing(false);
       setEditShiftId(null);
@@ -236,8 +236,6 @@ const SPSchedule = () => {
       }
     }
   };
-
-
 
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100 p-6 flex items-center justify-center"
@@ -303,8 +301,8 @@ const SPSchedule = () => {
                 onChange={(e) => setShiftTime(e.target.value)}
                 className="border border-yellow-500 rounded-lg p-2 w-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
               >
-                <option value="Day">Day</option>
-                <option value="Night">Night</option>
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
               </select>
             </div>
 

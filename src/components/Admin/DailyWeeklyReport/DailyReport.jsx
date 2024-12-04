@@ -343,6 +343,20 @@ const DailyReport = () => {
                                                 <h4 className="text-md font-bold">Write the Serial Numbers:</h4>
                                                 <p>{report.serialNumbers || "N/A"}</p>
                                             </div>
+
+                                            <div className="mb-6">
+                                                <h4 className="text-md font-bold">ITO AY PATUNAY NA LAHAT NG DETALYE AT PERA NA NAKASAAD SA REPORT NA ITO AY WASTO AT KUMPLETO</h4>
+                                                <p>{report.outgoingCrew || "N/A"}</p>
+                                                <p>{report.incomingCrew || "N/A"}</p>
+                                            </div>
+
+                                            <div className="mb-6">
+                                                <h4 className="text-md font-bold">***Do not write below this line***</h4>
+                                                <p>Commission: ₱{report.dnwbtl.commission}</p>
+                                                <p>Short: ₱{report.dnwbtl.short}</p>
+                                                <p>Over: ₱{report.dnwbtl.over}</p>
+                                            </div>
+
                                             <button
                                                 className="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition-all mt-4"
                                                 onClick={() => downloadPDF(report.id)}

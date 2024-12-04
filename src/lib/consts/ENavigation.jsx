@@ -1,6 +1,7 @@
 import {
     HiOutlineViewGrid,
     HiDocumentReport,
+    HiOutlineCube,
 } from 'react-icons/hi'
 import { MdInventory2 } from "react-icons/md";
 import { AiFillSchedule } from "react-icons/ai";
@@ -17,6 +18,12 @@ export const DASHBOARD_SIDEBAR_LINKS = [
         label: 'Inventory',
         path: 'einventory',
         icon: <MdInventory2 />
+    },
+    {
+        key: 'eproduct',
+        label: 'Products',
+        path: 'eproduct',
+        icon: <HiOutlineCube />
     },
     {
         key: 'esalesreport',

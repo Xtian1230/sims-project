@@ -166,7 +166,7 @@ export default function SPHeader() {
               <span className="sr-only">Open user menu</span>
               <div
                 className="h-10 w-10 rounded-full bg-sky-500 bg-cover bg-no-repeat bg-center"
-                style={{ backgroundImage: 'url("/public/Assets/profile.png")' }}
+                style={{ backgroundImage: 'url("/src/assets/profile.png")' }}
               >
                 <span className="sr-only">Marc Backes</span>
               </div>
@@ -192,6 +192,19 @@ export default function SPHeader() {
                     )}
                   >
                     Your Profile
+                  </div>
+                )}
+              </MenuItem>
+              <MenuItem>
+                {({ active }) => (
+                  <div
+                    onClick={() => navigate('ehistory')}
+                    className={classNames(
+                      active && 'bg-gray-100',
+                      'active:bg-gray-200 rounded-sm px-4 py-2 text-gray-700 cursor-pointer focus:bg-gray-200'
+                    )}
+                  >
+                    History
                   </div>
                 )}
               </MenuItem>

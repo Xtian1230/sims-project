@@ -13,23 +13,28 @@ import WeeklyReport from "./components/Admin/DailyWeeklyReport/WeeklyReport";
 import Employees from "./components/Admin/Employees";
 import Profile from "./components/Admin/Profile";
 import Notification from "./components/Admin/Notification";
+import History from "./components/Admin/HistoryLog"
 
 import SPLayout from "./components/shared/SPLayout";
 import SPDashboard from "./components/Supervisor/SPDashboard";
 import SPSalesReport from "./components/Supervisor/SPSalesReport";
 import SPInventory from "./components/Supervisor/SPInvetory";
+import SPProduct from "./components/Supervisor/SPProductList"
 import SPEmployee from "./components/Supervisor/SPEmployee";
 import SPSchedule from "./components/Supervisor/SPSchedule";
 import SPProfile from "./components/Supervisor/SPProfile";
 import SPNotification from "./components/Supervisor/SPNotification";
+import SPHistory from "./components/Supervisor/SPHistoryLog"
 
 import ELayout from "./components/shared/ELayout";
 import EDashboard from "./components/ServiceCrew/EDashboard";
 import EInventory from "./components/ServiceCrew/EInventory";
+import EProduct from "./components/ServiceCrew/EProductList"
 import ESalesReport from "./components/ServiceCrew/ESalesReport";
 import ESchedule from "./components/ServiceCrew/ESchedule";
 import EProfile from "./components/ServiceCrew/EProfile";
 import ENotification from "./components/ServiceCrew/ENotification";
+import EHistory from "./components/ServiceCrew/EHistoryLog"
 
 function App() {
   const isAuthenticated = false; // Replace with actual authentication check logic
@@ -50,25 +55,30 @@ function App() {
             <Route path="employees" element={<Employees />} />
             <Route path="profile" element={<Profile />} />
             <Route path="notification" element={<Notification />} />
+            <Route path="history" element={<History />} />
           </Route>
 
           <Route path="/spdashboard" element={<SPLayout />}>
             <Route index element={<SPDashboard />} />
             <Route path="spinventory" element={<SPInventory />} />
+            <Route path="spproduct" element={<SPProduct />} />
             <Route path="spsalesreport" element={<SPSalesReport />} />
             <Route path="spemployee" element={<SPEmployee />} />
             <Route path="spschedule" element={<SPSchedule />} />
             <Route path="spprofile" element={<SPProfile />} />
             <Route path="spnotification" element={<SPNotification />} />
+            <Route path="sphistory" element={<SPHistory />} />
           </Route>
 
           <Route path="/edashboard" element={<ELayout />}>
             <Route index element={<EDashboard />} />
             <Route path="einventory" element={<EInventory />} />
+            <Route path="eproduct" element={<EProduct />} />
             <Route path="esalesreport" element={<ESalesReport />} />
             <Route path="eschedule" element={<ESchedule />} />
             <Route path="eprofile" element={<EProfile />} />
             <Route path="enotification" element={<ENotification />} />
+            <Route path="ehistory" element={<EHistory />} />
           </Route>
 
           <Route path="/login" element={<Login />} />

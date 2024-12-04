@@ -1,113 +1,110 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from 'react';
-import BgImage from '../../assets/BgImage.jpg';
-import { db } from '../../Firebase/firebaseConfig';
-import { onSnapshot, collection, query, where, getDocs } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import React, { useEffect, useState } from 'react'
+import BgImage from '../../assets/BgImage.jpg'
+import { db } from '../../Firebase/firebaseConfig'
+import { onSnapshot, collection, query, where, getDocs } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
 const SPNotification = () => {
-    const [notifications, setNotifications] = useState([]);
-    const [userName, setUserName] = useState(null);
-    const [visibleNotifications, setVisibleNotifications] = useState(5);
+    const [notifications, setNotifications] = useState([])
+    const [userName, setUserName] = useState(null)
+    const [visibleNotifications, setVisibleNotifications] = useState(5)
 
     useEffect(() => {
         // Get the logged-in user's uid from Firebase Authentication
-        const auth = getAuth();
-        const user = auth.currentUser;
+        const auth = getAuth()
+        const user = auth.currentUser
 
         if (user) {
-            const userUid = user.uid;
+            const userUid = user.uid
 
             // Query the employees collection to get the user's full name based on uid
             const getUserData = async () => {
                 try {
-                    const employeesRef = collection(db, 'employees');
-                    const employeeQuery = query(employeesRef, where('uid', '==', userUid));
-                    const querySnapshot = await getDocs(employeeQuery);
+                    const employeesRef = collection(db, 'employees')
+                    const employeeQuery = query(employeesRef, where('uid', '==', userUid))
+                    const querySnapshot = await getDocs(employeeQuery)
 
                     if (!querySnapshot.empty) {
-                        const employeeData = querySnapshot.docs[0].data();
-                        setUserName(employeeData.fullName); // Set the user's full name
+                        const employeeData = querySnapshot.docs[0].data()
+                        setUserName(employeeData.fullName) // Set the user's full name
                     } else {
-                        console.error('No employee found for the current user.');
+                        console.error('No employee found for the current user.')
                     }
                 } catch (error) {
-                    console.error('Error fetching user data:', error.message);
+                    console.error('Error fetching user data:', error.message)
                 }
-            };
+            }
 
-            getUserData();
+            getUserData()
         } else {
-            console.error('No user is logged in.');
+            console.error('No user is logged in.')
         }
-    }, []);
+    }, [])
 
     useEffect(() => {
-        if (!userName) return; // Wait for userName to be set
+        if (!userName) return // Wait for userName to be set
 
         // Query to get shifts only for the logged-in user by name
-        const shiftsRef = collection(db, 'shifts');
-        const userShiftsQuery = query(shiftsRef, where('name', '==', userName));
+        const shiftsRef = collection(db, 'shifts')
+        const userShiftsQuery = query(shiftsRef, where('name', '==', userName))
 
         const unsubscribe = onSnapshot(userShiftsQuery, (snapshot) => {
             setNotifications((prevNotifications) => {
-                const newNotifications = [];
+                const newNotifications = []
 
                 snapshot.docChanges().forEach((change) => {
-                    const shiftData = change.doc.data();
-                    const action = change.type; // "added", "modified", "removed"
+                    const shiftData = change.doc.data()
+                    const action = change.type // "added", "modified", "removed"
 
                     // Validate shiftData fields
                     if (!shiftData?.date || !shiftData?.time || !shiftData?.location || !shiftData?.name) {
-                        console.warn('Incomplete shift data', shiftData);
-                        return;
+                        console.warn('Incomplete shift data', shiftData)
+                        return
                     }
 
-                    let message;
+                    let message
                     if (action === 'added') {
-                        message = `New shift added for ${shiftData.name} on ${shiftData.date} (${shiftData.time}) at ${shiftData.location}.`;
+                        message = `New shift added for ${shiftData.name} on ${shiftData.date} (${shiftData.time}) at ${shiftData.location}.`
                     } else if (action === 'modified') {
-                        message = `Shift updated for ${shiftData.name} on ${shiftData.date} (${shiftData.time}) at ${shiftData.location}.`;
+                        message = `Shift updated for ${shiftData.name} on ${shiftData.date} (${shiftData.time}) at ${shiftData.location}.`
                     } else if (action === 'removed') {
-                        message = `Shift for ${shiftData.name} on ${shiftData.date} was deleted.`;
+                        message = `Shift for ${shiftData.name} on ${shiftData.date} was deleted.`
                     }
 
                     if (message) {
                         // Add only if the message does not already exist
                         if (
-                            !prevNotifications.some(
-                                (notif) =>
-                                    notif.id === change.doc.id && notif.message === message
-                            )
+                            !prevNotifications.some((notif) => notif.id === change.doc.id && notif.message === message)
                         ) {
                             newNotifications.push({
                                 id: change.doc.id,
                                 message,
-                                timestamp: shiftData.timestamp || new Date().toISOString(),
-                            });
+                                timestamp: shiftData.timestamp || new Date().toISOString()
+                            })
                         }
                     }
-                });
+                })
 
-                return [...prevNotifications, ...newNotifications];
-            });
-        });
+                return [...prevNotifications, ...newNotifications]
+            })
+        })
 
         // Cleanup the listener
-        return () => unsubscribe();
-    }, [userName]);
+        return () => unsubscribe()
+    }, [userName])
 
     const deleteNotification = (notifId) => {
-        setNotifications((prev) => prev.filter((notif) => notif.id !== notifId));
-    };
+        setNotifications((prev) => prev.filter((notif) => notif.id !== notifId))
+    }
 
     const showMoreNotifications = () => {
-        setVisibleNotifications((prev) => prev + 5);
-    };
+        setVisibleNotifications((prev) => prev + 5)
+    }
 
     const showLessNotifications = () => {
-        setVisibleNotifications(5);
-    };
+        setVisibleNotifications(5)
+    }
 
     return (
         <div
@@ -165,7 +162,7 @@ const SPNotification = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SPNotification;
+export default SPNotification

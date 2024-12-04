@@ -22,7 +22,7 @@ const ESidebar = ({ isOpen }) => {
         {/* Logo and Toggle Button */}
         <div className='flex items-center justify-between px-1 py-3'>
           <div className='flex items-center gap-2'>
-            <img src="/Assets/burger(1).png" alt="Icon" className="h-6 w-6" />
+            <img src="/src/assets/burger(1).png" rel="Icon" className="h-6 w-6" />
             {expanded && (
               <span className='text-yellow-400 text-xl'>Service Crew</span>
             )}

@@ -1,6 +1,7 @@
 import {
     HiOutlineViewGrid,
     HiDocumentReport,
+    HiOutlineCube
 } from 'react-icons/hi'
 import { MdInventory2 } from "react-icons/md";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -18,6 +19,12 @@ export const SPDASHBOARD_SIDEBAR_LINKS = [
         label: 'Inventory',
         path: 'spinventory',
         icon: <MdInventory2 />
+    },
+    {
+        key: 'spproduct',
+        label: 'Products',
+        path: 'spproduct',
+        icon: <HiOutlineCube />
     },
     {
         key: 'spsalesreport',
