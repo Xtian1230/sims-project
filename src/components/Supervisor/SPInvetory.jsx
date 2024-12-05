@@ -277,9 +277,9 @@ const SPInventory = () => {
                         onChange={handleLocationChange}
                         className="px-3 py-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-full sm:w-auto"
                     >
-                        <option value="nagcarlan">Nagcarlan</option>
-                        <option value="rizal">Rizal</option>
-                        <option value="sanPablo">San Pablo</option>
+                        <option value="Nagcarlan">Nagcarlan</option>
+                        <option value="Rizal">Rizal</option>
+                        <option value="San Pablo">San Pablo</option>
                     </select>
                 </div>
 
